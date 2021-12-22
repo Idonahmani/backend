@@ -28,6 +28,24 @@ def assignment8_func():
     hobbies=('art','sport','music','flask')
     return render_template('assignment8.html',fullname=profile,University=uni,degress=degrees,hobbies=hobbies)
 
+@app.route('/assignment9',methods=['GET','POST'])
+def assignment9_func():
+    users = {'user1': {'name': 'Oren', 'email':'Oren@gmail.com'},
+             'user2':{'name': 'Ido', 'email':'Ido@gmail.com'},
+             'user3': {'name': 'Dana', 'email': 'Dana@gmail.com'},
+             'user4': {'name': 'Itzik', 'email': 'Itzik@gmail.com'},
+             'user5': {'name': 'Reut', 'email': 'Reut@gmail.com'}}
+    if request.method == 'GET':
+        if 'usersearch' in request.args:
+            search_user = request.args['usersearch']
+            return render_template('assignment9.html',users=users,search_user=search_user)
+        return render_template('assignment9.html',users=users)
+    if request.method == "POST":
+        username = request.form['username']
+        email = request.form['email']
+        session['username']=username
+        session['email']=email
+        return render_template('assignment9.html')
 
 @app.route('/catalog')
 def catalog_func():
@@ -49,10 +67,13 @@ def login_fun():
         session['password']=password
         return redirect(url_for('home_func'))
 
+
+
+
 @app.route('/logout')
 def logout_func():
     session['username']=''
-    return render_template('index.html')
+    return render_template('assignment9.html')
 
 
 if __name__== '__main__':
