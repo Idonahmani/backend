@@ -1,10 +1,8 @@
 <header>
     <a href="/">home</a>
-    <a href="/about">about</a>
     <a href="/catalog">catalogs</a>
     {%if session.username%}
         <a href="/logout">log-out</a>
-    {%else%}
-        <a href="/login">log-in</a>
+                <h3>Registered -  {{session.username}}</h3>
     {%endif%}
 </header>
